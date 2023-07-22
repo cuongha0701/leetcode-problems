@@ -3,15 +3,23 @@
  * @return {void} Do not return anything, modify arr in-place instead.
  */
 var duplicateZeros = function (arr) {
-  let i = 0;
-  while (i < arr.length) {
-    if (arr[i] === 0) {
-      for (let j = arr.length - 1; j > i; j--) {
-        arr[j] = arr[j - 1];
-      }
-      i += 2;
-      continue;
+  let zeroes = arr.reduce(
+    (accumulator, currentValue) =>
+      currentValue === 0 ? ++accumulator : accumulator,
+    0
+  );
+  let n = arr.length;
+
+  for (let i = arr.length - 1; i >= 0; i--) {
+    if (i + zeroes < n) {
+      arr[i + zeroes] = arr[i];
     }
-    i++;
+
+    if (arr[i] == 0) {
+      zeroes -= 1;
+      if (i + zeroes < n) {
+        arr[i + zeroes] = 0;
+      }
+    }
   }
 };
