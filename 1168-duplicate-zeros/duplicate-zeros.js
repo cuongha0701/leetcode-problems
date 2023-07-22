@@ -9,7 +9,6 @@ var duplicateZeros = function (arr) {
       for (let j = arr.length - 1; j > i; j--) {
         arr[j] = arr[j - 1];
       }
-      // arr[i + 1] = 0;
       i += 2;
       continue;
     }
