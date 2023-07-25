@@ -3,19 +3,11 @@
  * @return {number[]}
  */
 var replaceElements = function (arr) {
-  let max = 0;
-  for (let i = 0; i < arr.length; i++) {
-    if (i === arr.length - 1) {
-      arr[i] = -1;
-      break;
-    }
-    for (let j = i + 1; j < arr.length; j++) {
-      if (arr[j] > max) {
-        max = arr[j];
-      }
-    }
+  let max = -1;
+  for (let i = arr.length - 1; i >= 0; i--) {
+    let cur = arr[i];
     arr[i] = max;
-    max = 0;
+    max = Math.max(cur, max);
   }
   return arr;
 };
