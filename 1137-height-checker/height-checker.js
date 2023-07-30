@@ -3,22 +3,21 @@
  * @return {number}
  */
 var heightChecker = function (heights) {
-  let map = new Array(101).fill(0);
+  const counts = new Array(101).fill(0);
+  const output = new Array(heights.length);
+  for (let i = 0; i < heights.length; i++) counts[heights[i]]++;
+  for (let i = 1; i < counts.length; i++) counts[i] += counts[i - 1];
 
   for (let i = 0; i < heights.length; i++) {
-    map[heights[i]]++;
+    output[counts[heights[i]] - 1] = heights[i];
+    counts[heights[i]]--;
   }
 
-  let num = 1;
   let result = 0;
-
-  for (let j = 0; j < heights.length; j++) {
-    while (!map[num]) {
-      console.log(num, j);
-      num++;
+  for (let i = 0; i < heights.length; i++) {
+    if (heights[i] !== output[i]) {
+      result++;
     }
-    if (heights[j] !== num) result++;
-    map[num]--;
   }
   return result;
 };
